@@ -1,0 +1,24 @@
+stages:
+  - build
+  - deploy
+
+# Build Stage
+build_job:
+  stage: build
+  image: node:16  # Use an official Node.js image
+  script:
+    - npm install
+    - npm run build  # Run the Vite build command
+  artifacts:
+    paths:
+      - dist/  # Vite outputs to the dist folder
+
+# Deploy Stage
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Deploying to VPS"
+    - scp -r ./dist/ root@194.238.19.74:/home/tushardevelops-beatfeed/htdocs/beatfeed.tushardevelops.com  # Upload the dist folder to VPS
+    - ssh root@194.238.19.74 'pm2 restart all'  # Or the command you use to restart your service
+  only:
+    - main  # Deploy only when pushing to the master branch
