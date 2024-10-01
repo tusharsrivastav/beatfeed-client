@@ -1,0 +1,42 @@
+.artist-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    padding: 32px 24px;
+}
+
+.artist-card-wrapper img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.artist-card-wrapper p {
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.artist-card-wrapper button {
+    width: 120px;
+    border-radius: 6px;
+    padding-block: 6px;
+    font-family: Poppins;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.follow-btn {
+    background-color: var(--blue);
+}
+
+.unfollow-btn {
+    background-color: var(--secondary);
+}
+
+.loading-btn {
+    opacity: 50%;
+}

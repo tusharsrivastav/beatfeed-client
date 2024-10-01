@@ -1,0 +1,90 @@
+.dropdown-wrapper {
+  padding: 16px;
+  position: relative;
+  background-color: var(--dark-grey);
+  border-radius: 8px 8px 0 0;
+  font-family: Poppins;
+  font-weight: 400;
+}
+
+.dropdown-active {
+  background-color: var(--dark-grey);
+}
+
+.dropdown-inactive {
+  background: none;
+}
+
+.profile-toggle {
+  display: flex;
+  cursor: pointer;
+}
+
+.profile-toggle > p {
+  /* border-left: 1px solid var(--secondary); */
+  margin: 0;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  text-wrap: nowrap;
+}
+
+.profile-toggle > img {
+  margin: 0;
+}
+
+.profile-menu {
+  list-style: none;
+  position: absolute;
+  width: 100%;
+  background-color: var(--dark-grey);
+  padding: 12px;
+  box-sizing: border-box;
+  left: 0;
+  font-size: 0.8rem;
+  border-radius: 0 0 8px 8px;
+}
+
+.profile-menu > li > a {
+  display: block;
+  text-decoration: none;
+  color: var(--white);
+  padding: 8px 8px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.profile-menu > li:last-child > a {
+  color: var(--error);
+}
+
+.signout-icon {
+  color: var(--error);
+  margin-right: 8px;
+}
+
+.profile-menu > li > a:hover {
+  background-color: var(--secondary);
+}
+
+.logout-btn {
+  color: var(--error);
+  padding: 8px;
+  margin-block: 6px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.logout-btn:hover {
+  opacity: 80%;
+}
+
+.avatar-header {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  margin-block: auto;
+  margin-inline: 12px;
+}

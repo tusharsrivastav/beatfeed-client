@@ -1,22 +1,47 @@
-import React from 'react'
-import SearchBar from './searchBar';
-import './header.css';
+import React from "react";
+import "./header.css";
+import { Link } from "react-router-dom";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useLogout } from "../../hooks/useLogout";
+import Dropdown from "../dropdown";
 
-const Header = ({ query, sendQueryToParent }) => {
+const Header = () => {
+  const { user } = useAuthContext();
+
   return (
-    <div className='header-wrapper'>
-        <div className='logo poppins-bold'>BeatFeed</div>
-        {/* <SearchBar query={query} sendQueryToParent={sendQueryToParent} /> */}
-        <ul className='login-signup-btn-wrapper poppins-regular'>
+    <div className="header-wrapper">
+      <div className="logo poppins-bold">
+        <Link to="/">BeatFeed</Link>
+      </div>
+
+      {user && (
+        <>
+          <ul className="navlinks-wrapper nav-left poppins-regular">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/artists">Artists</Link>
+            </li>
+          </ul>
+          <Dropdown />
+        </>
+      )}
+
+      {!user && (
+        <ul className="navlinks-wrapper nav-right poppins-regular">
           <li>
-            <a href="">Login</a>
+            <Link to="/login">Login</Link>
           </li>
           <li>
-            <a href="">Signup</a>
+            <Link to="/signup" className="signup-btn">
+              Signup
+            </Link>
           </li>
         </ul>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default Header;

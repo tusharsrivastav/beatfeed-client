@@ -1,11 +1,8 @@
 .filter-wrapper {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-columns: auto;
-  /* grid-template-areas: "1 2 3"; */
-  /* justify-content: space-between;
-  padding-inline: 120px;
-  align-items: center; */
   margin: 24px 0;
 }
 
@@ -15,15 +12,15 @@
   justify-self: center;
   display: flex;
   padding: 6px;
-  background-color: var(--secondary);
+  /* background-color: var(--secondary); */
   border-radius: 50px;
 }
 
 .filter {
   height: 36px;
-  padding-inline: 24px;
-  font-size: 0.8em;
-  color: var(--yellow);
+  padding: 20px 24px;
+  font-size: .9rem;
+  color: var(--white);
   box-sizing: border-box;
   border-radius: 50px;
   display: flex;
@@ -31,8 +28,8 @@
 }
 
 .filter-active {
-  background-color: var(--yellow);
-  color: var(--primary);
+  background-color: var(--blue);
+  color: var(--white);
   transition: .1s;
 }
 

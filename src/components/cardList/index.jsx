@@ -3,80 +3,99 @@ import Card from "./card/index.jsx";
 import { sub } from "date-fns";
 import "./cardList.css";
 import axios from "axios";
-// import { musicData } from "../../Data.jsx";
+import { useAuthContext } from "../../hooks/useAuthContext.js";
+import { Link } from "react-router-dom";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const CardList = ({ query, filter, showWithCover }) => {
-  let [albumsData, setAlbumsData] = useState({ message: "", albums: [] });
+  const { user } = useAuthContext();
+  let [albumsData, setAlbumsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const currentDate = new Date();
-  let filteredAlbumsData = [];
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/v1/albums")
-      .then((response) => {
-        // console.log(response.data);
-        setAlbumsData(response.data);
+    const getAlbums = async () => {
+      if (user === undefined) {
+        return;
+      }
+      // user ? console.log("user found") : console.log("user not found");
+      const albumsRoute = user ? "albums/followed-albums" : "albums/";
+      try {
+        const response = await axios.get(`${API_URL}/api/v1/${albumsRoute}`, {
+          withCredentials: true,
+        });
+
+        setAlbumsData(response.data.data.albums);
+        // console.log("albums", albumsData);
+      } catch {
+        (err) => {
+          if (err.response.status === 404) {
+            setAlbumsData([]);
+          }
+          console.error("Error fetching music data:", err);
+        };
+      } finally {
         setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching music data:", error);
-        setLoading(false);
-      });
-  }, []);
+      }
+    };
+
+    getAlbums();
+  }, [user]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  // console.log(albumsData.albums);
+  // console.log(albumsData);
 
   // CHECK WHETHER albumsData IS EMPTY
-  if (
-    !albumsData ||
-    !albumsData.albums ||
-    albumsData.albums.length === 0
-  ) {
-    return <div>No music data available.</div>;
+  if ((!albumsData || albumsData.length === 0) && user.followedArtists.length > 0) {
+    return <div className="no-data-error">No music data available</div>;
   }
 
   // APPLY FILTERS
-  filteredAlbumsData = showWithCover
-    ? albumsData.albums.filter((item) => item.coverUrl != "")
-    : albumsData.albums;
+  let filteredAlbumsData = [];
 
-  if (filter == "upcoming") {
-    filteredAlbumsData = filteredAlbumsData.filter((item) => {
-      const releaseDate = new Date(item.releaseDate);
-      return releaseDate > currentDate && item.title != "TBA";
-    })
-    .sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate));
-  } else if (filter == "last30days") {
+  filteredAlbumsData = showWithCover
+    ? albumsData.filter((item) => item.coverUrl != "")
+    : albumsData;
+
+  if (filter === "upcoming") {
+    filteredAlbumsData = filteredAlbumsData
+      .filter((item) => {
+        const releaseDate = new Date(item.releaseDate);
+        return releaseDate > currentDate && item.title != "TBA";
+      })
+      .sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate));
+  } else if (filter === "recent") {
     filteredAlbumsData = filteredAlbumsData
       .filter((item) => {
         const releaseDate = new Date(item.releaseDate);
         const newDate = sub(new Date(currentDate), { months: 1 });
-        return releaseDate < currentDate && releaseDate > newDate;
+        return releaseDate < currentDate;
       })
       .sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate))
       .reverse();
   }
 
-  // SEARCH
-  const searchfilteredAlbumsData = filteredAlbumsData.filter((item) => {
-    return (
-      item.artists.some((name) => 
-        name.toLowerCase().includes(query.toLowerCase())
-      ) ||
-      item.artists.includes(query.toLowerCase()) ||
-      item.title.toLowerCase().includes(query.toLowerCase())
-    );
-  });
+  // CHECK WHETHER filteredAlbumsData IS EMPTY
+  if (filteredAlbumsData.length === 0) {
+    const filterError =
+      filter === "upcoming"
+        ? "No upcoming music from your favourite artists"
+        : "Your favourite artists haven't released any music recently";
+    return (<div className="no-data-error">
+      {filterError}
+      <p>Follow more artists <Link to="/artists">here</Link></p> 
+      </div>)
+  }
+
 
   return (
     <div className="cards">
-      {searchfilteredAlbumsData.map((item, key) => {
+      {filteredAlbumsData.map((item, key) => {
         return <Card key={key} albumInfo={item} />;
       })}
     </div>

@@ -1,8 +1,12 @@
 #root {
     --primary: #050505;
     --secondary: #353535;
+    --dark-grey: #1e1e1e;
     --yellow: #1385ef;
     --white: #E7E6E6;
     --beige: #bdbdbd;
     --light-beige: #DBD6D6;
+    --blue: #1385ef;
+    --error: #b02424;
+    --error-light: #ce00005b;
 }

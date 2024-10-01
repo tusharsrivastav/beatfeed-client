@@ -1,37 +1,57 @@
 .header-wrapper {
-    padding: 50px 0;
-    display: flex;
-    justify-content: space-between;
+  padding: 50px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.logo {
-    font-size: 2em;
-    color: var(--white);
+.logo a {
+  font-size: 2em;
+  color: var(--white);
+  text-decoration: none;
 }
 
-.login-signup-btn-wrapper {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    align-items: center;
-    justify-content: space-between;
-    width: 160px;
-    padding: 0;
+.navlinks-wrapper {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  align-items: center;
+  width: 100%;
 }
 
-.login-signup-btn-wrapper a {
-    text-decoration: none;
-    color: var(--white);
+.nav-right {
+  justify-content: flex-end;
+  padding: 0;
 }
 
-.login-signup-btn-wrapper li:last-child a {
-    background-color: var(--yellow);
-    padding: 12px 24px;
-    border-radius: 8px;
-    box-sizing: border-box;
+.nav-left {
+    justify-content: flex-start;
+    padding: 0 28px;
+  }
+
+.navlinks-wrapper > li {
+  font-size: 0.9rem;
+  margin-inline: 8px;
 }
 
-.login-signup-btn-wrapper a:hover {
-    cursor: pointer;
-    opacity: 80%;
+.navlinks-wrapper > li > a {
+  text-decoration: none;
+  color: var(--white);
+}
+
+.navlinks-wrapper > li:last-child {
+  display: flex;
+}
+
+.navlinks-wrapper > li > a:hover {
+  cursor: pointer;
+  opacity: 80%;
+}
+
+.signup-btn {
+  background-color: var(--blue);
+  color: var(--white);
+  padding: 12px 24px;
+  border-radius: 12px;
+  margin-left: 20px;
 }

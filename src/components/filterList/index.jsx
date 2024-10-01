@@ -1,33 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import "./filterList.css";
 
 const FilterList = ({ filter, sendFilterToParent, showWithCover, handleCoverToggle }) => {
+
   return (
     <div className="filter-wrapper">
       <div className="primary-filters">
         <div
           className={`filter ${
-            filter === "upcoming" ? "filter-active" : ""
-          } poppins-regular cur-po`}
+            filter === "recent" ? "filter-active" : ""
+          } poppins-light cur-po`}
           onClick={() => {
-            sendFilterToParent("upcoming");
+            sendFilterToParent("recent");
           }}>
-          Upcoming Releases
+          Recent
         </div>
         <div
           className={`filter ${
-            filter === "last30days" ? "filter-active" : ""
-          } poppins-regular cur-po`}
+            filter === "upcoming" ? "filter-active" : ""
+          } poppins-light cur-po`}
           onClick={() => {
-            sendFilterToParent("last30days");
+            sendFilterToParent("upcoming");
           }}>
-          Last 30 days
+          Upcoming
         </div>
       </div>
-
-      {/* <div className="secondary-filters">
-        
-      </div> */}
 
       <label className="poppins-light">
         <input
@@ -35,7 +32,7 @@ const FilterList = ({ filter, sendFilterToParent, showWithCover, handleCoverTogg
           checked={showWithCover}
           onChange={handleCoverToggle}
         />
-        Show Only Albums with Cover Image
+        Only Show Albums with Cover Image
       </label>
     </div>
   );
