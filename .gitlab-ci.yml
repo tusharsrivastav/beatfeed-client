@@ -2,28 +2,26 @@ stages:
   - build
   - deploy
 
-# Build Stage
 build_job:
   stage: build
-  image: node:16  # Use an official Node.js image
+  image: node:16
   script:
     - npm install
-    - npm run build  # Run the Vite build command
+    - npm run build
   artifacts:
     paths:
-      - dist/  # Vite outputs to the dist folder
+      - dist/
 
-# Deploy Stage
 deploy_job:
   stage: deploy
   before_script:
-    - 'which ssh || ( apt-get update -y && apt-get install openssh-client -y )'
+    - 'which ssh || (apt-get update -y && apt-get install openssh-client -y)'
     - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa  # Inject the private key
-    - chmod 600 ~/.ssh/id_rsa  # Set correct permissions for the private key
-    - ssh-keyscan 194.238.19.74 >> ~/.ssh/known_hosts  # Add your VPS to known hosts to avoid prompt
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan 194.238.19.74 >> ~/.ssh/known_hosts
   script:
     - echo "Deploying to VPS"
     - scp -r ./dist/ tushar@194.238.19.74:/home/tushardevelops-beatfeed/htdocs/beatfeed.tushardevelops.com
-   only:
-    - main  # Deploy only when pushing to the master branch
+  only:
+    - main
