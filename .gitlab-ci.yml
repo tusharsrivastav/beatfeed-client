@@ -22,6 +22,6 @@ deploy_job:
     - ssh-keyscan 194.238.19.74 >> /home/tushar/.ssh/known_hosts
   script:
     - echo "Deploying to VPS"
-    - scp -v -o "StrictHostKeyChecking=no" -i /home/tushar/.ssh/id_rsa -r ./dist/ tushar@194.238.19.74:/home/tushardevelops-beatfeed/htdocs/beatfeed.tushardevelops.com
+    - rsync -avz -e "ssh -i /home/tushar/.ssh/id_rsa" ./dist/ tushar@194.238.19.74:/home/tushardevelops-beatfeed/htdocs/beatfeed.tushardevelops.com
   only:
     - main
