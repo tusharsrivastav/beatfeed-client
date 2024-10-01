@@ -16,9 +16,9 @@ deploy_job:
   stage: deploy
   before_script:
     - 'which ssh || (apt-get update -y && apt-get install openssh-client -y)'
-    - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
+    - mkdir -p /home/tushar/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > /home/tushar/.ssh/id_rsa
+    - chmod 600 /home/tushar/.ssh/id_rsa
     - ssh-keyscan 194.238.19.74 >> ~/.ssh/known_hosts
   script:
     - echo "Deploying to VPS"
