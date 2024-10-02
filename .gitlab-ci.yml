@@ -7,7 +7,7 @@ build_job:
   image: node:16
   script:
     - npm install
-    - npm run build --mode production
+    - npm run build -- --mode production
   artifacts:
     paths:
       - dist/
