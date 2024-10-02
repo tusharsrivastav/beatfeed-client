@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <div className="header-wrapper">
       <div className="logo poppins-bold">
-        <Link to="/">Tushar1</Link>
+        <Link to="/">BeatFeed</Link>
       </div>
 
       {user && (
