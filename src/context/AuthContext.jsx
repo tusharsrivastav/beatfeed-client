@@ -55,7 +55,6 @@ export const AuthContextProvider = ({ children }) => {
     const loadUser = async () => {
       try {
         console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
-        // get user profile
         const response = await axios.get(`${API_URL}/api/v1/users/profile`, {
           withCredentials: true,
         });
