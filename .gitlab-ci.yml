@@ -1,6 +1,13 @@
 stages:
+  - check_rsync
   - build
   - deploy
+
+check_rsync:
+  stage: check_rsync
+  script:
+    - which rsync || echo "rsync not found"
+
 
 build_job:
   stage: build
