@@ -54,6 +54,7 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const loadUser = async () => {
       try {
+        console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
         // get user profile
         const response = await axios.get(`${API_URL}/api/v1/users/profile`, {
           withCredentials: true,
@@ -70,9 +71,12 @@ export const AuthContextProvider = ({ children }) => {
         console.log("Not Authenticated: ", error);
         try {
           // get new access token
-          const response = await axios.post(`${API_URL}/api/v1/users/refresh-token`, {
-            withCredentials: true,
-          });
+          const response = await axios.post(
+            `${API_URL}/api/v1/users/refresh-token`,
+            {
+              withCredentials: true,
+            }
+          );
 
           dispatch({ type: actions.LOGIN, payload: response.data.data.user });
           if (location.pathname === "/login") {
@@ -82,7 +86,11 @@ export const AuthContextProvider = ({ children }) => {
           // logout if refresh token is expired or invalid
           if (error.response.status === 401 || error.response.status === 404) {
             dispatch({ type: actions.LOGOUT });
-            if (location.pathname !== "/login" && location.pathname !== "/signup" && location.pathname !== "/") {
+            if (
+              location.pathname !== "/login" &&
+              location.pathname !== "/signup" &&
+              location.pathname !== "/"
+            ) {
               navigate("/login"); // Navigate to login only if not already there
             }
           } else {
