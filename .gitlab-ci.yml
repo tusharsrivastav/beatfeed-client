@@ -11,6 +11,8 @@ build_job:
   artifacts:
     paths:
       - dist/
+  only:
+    - main
 
 deploy_job:
   image: ubuntu:latest
