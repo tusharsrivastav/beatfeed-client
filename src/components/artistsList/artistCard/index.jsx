@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./artistCard.css";
 import { useAuthContext } from "../../../hooks/useAuthContext.js";
 import { actions } from "../../../context/AuthContext.jsx";
 import { useFollowArtist } from "../../../hooks/useFollowArtist.js";
@@ -18,13 +17,15 @@ const ArtistCard = ({ artist }) => {
   const { isFollowed, loading, toggleFollow } = useFollowArtist(id);
 
   return (
-    <div className="artist-card-wrapper">
-      <img src={image} alt={name}></img>
-      <p>{name}</p>
+    <div className="flex flex-col items-center w-[140px] md:w-[200px] mx-4 my-8 md:mx-6 md:my-10 space-y-4">
+      <img src={image} alt={name} className="aspect-square rounded-full"></img>
+      <p className="font-sans font-medium text-beige-light text-md md:text-lg text-center">
+        {name}
+      </p>
       <button
-        className={`${isFollowed ? "unfollow-btn" : "follow-btn"} ${
-          loading && "loading-btn"
-        }`}
+        className={`w-[120px] rounded-md py-1.5 font-sans text-white text-sm cursor-pointer ${
+          isFollowed ? "bg-charcoal" : "bg-blue"
+        } ${loading && "opacity-50"}`}
         onClick={toggleFollow}>
         {loading ? "loading..." : isFollowed ? "Unfollow" : "Follow"}
       </button>

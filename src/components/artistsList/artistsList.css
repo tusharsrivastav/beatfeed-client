@@ -1,7 +1,0 @@
-.artist-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
-    min-height: 40vh;
-}
