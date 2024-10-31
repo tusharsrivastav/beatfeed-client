@@ -16,12 +16,12 @@ const Artists = () => {
       : "";
 
   return (
-    <div className="artists-page-wrapper">
-      <div className="artists-page-header">
-        <h3>
+    <div className="flex flex-col items-center h-full w-full">
+      <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 w-full md:px-6">
+        <h3 className="text-white font-sans text-lg font-semibold">
           {pageTitle}{" "}
           {location.pathname === "/followed-artists"
-            ? `(${user.followedArtists.length})`
+            ? `(${user?.followedArtists.length})`
             : ""}
         </h3>
         <SearchBar />

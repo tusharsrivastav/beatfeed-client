@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Card from "./card/index.jsx";
 import { sub } from "date-fns";
-import "./cardList.css";
 import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext.js";
 import { Link } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const CardList = ({ query, filter, showWithCover }) => {
+const CardList = ({ filter, showWithCover }) => {
   const { user } = useAuthContext();
   let [albumsData, setAlbumsData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -45,14 +44,14 @@ const CardList = ({ query, filter, showWithCover }) => {
   }, [user]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="text-beige mt-12">Loading...</div>;
   }
 
   // console.log(albumsData);
 
   // CHECK WHETHER albumsData IS EMPTY
   if ((!albumsData || albumsData.length === 0) && user.followedArtists.length > 0) {
-    return <div className="no-data-error">No music data available</div>;
+    return <div className="flex flex-col text-white justify-center items-center text-center">No music data available</div>;
   }
 
   // APPLY FILTERS
@@ -86,15 +85,15 @@ const CardList = ({ query, filter, showWithCover }) => {
       filter === "upcoming"
         ? "No upcoming music from your favourite artists"
         : "Your favourite artists haven't released any music recently";
-    return (<div className="no-data-error">
+    return (<div className="flex flex-col text-beige text-md justify-center items-center text-center mt-12">
       {filterError}
-      <p>Follow more artists <Link to="/artists">here</Link></p> 
+      <p>Follow more artists <Link to="/artists" className="text-blue underline">here</Link></p> 
       </div>)
   }
 
 
   return (
-    <div className="cards">
+    <div className="flex flex-wrap justify-center mt-6 min-h-2/5">
       {filteredAlbumsData.map((item, key) => {
         return <Card key={key} albumInfo={item} />;
       })}

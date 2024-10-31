@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import "./dropdown.css";
 import { Link, useLocation } from "react-router-dom";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -45,35 +44,31 @@ const Dropdown = () => {
     };
   }, [location.pathname]);
 
+  const linkItemStyle = 'block w-full no-underline text-white p-3 rounded-md box-border hover:bg-charcoal';
+
   return (
-    <div
-      ref={toggleRef}
-      className={`dropdown-wrapper ${
-        isOpen ? "dropdown-active" : "dropdown-inactive"
-      }`}>
-      <div className="profile-toggle" onClick={handleDropdownToggle}>
-        <p>{user.fullname}</p>
-        <img
-          src={user.avatar === "" ? dummyAvatar : user.avatar}
-          className="avatar-header"
-        />
-      </div>
+    <div ref={toggleRef} className="relative font-sans ml-5">
+      <img
+        src={user.avatar === "" ? dummyAvatar : user.avatar}
+        className="size-14 rounded-full cursor-pointer"
+        onClick={handleDropdownToggle}
+      />
       {isOpen && (
-        <ul className="profile-menu">
+        <ul className="list-none absolute right-0 mt-2 w-140 text-nowrap bg-gray-dark p-5 box-border text-sm rounded-lg">
           <li>
-            <Link to="/">Profile</Link>
+            <Link to="/" className={linkItemStyle}>Profile</Link>
           </li>
           <li>
-            <Link to="/followed-artists">Followed Artists</Link>
+            <Link to="/followed-artists" className={linkItemStyle}>Followed Artists</Link>
           </li>
           <li>
-            <Link to="/">Settings</Link>
+            <Link to="/" className={linkItemStyle}>Settings</Link>
           </li>
-          <li className="logout-btn" onClick={handleLogout}>
+          <li className="text-red text-sm p-2 my-2 rounded-md box-border cursor-pointer hover:opacity-80" onClick={handleLogout}>
             <FontAwesomeIcon
               icon={faSignOut}
               size="lg"
-              className="signout-icon"
+              className="mr-2"
             />
             Logout
           </li>

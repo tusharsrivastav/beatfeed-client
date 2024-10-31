@@ -1,5 +1,4 @@
 import React from "react";
-import "./card.css";
 import GenreItem from "./genreItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpotify } from "@fortawesome/free-brands-svg-icons";
@@ -60,35 +59,36 @@ const Card = ({ albumInfo }) => {
   const formattedArtistName = formatArtistName(artistName);
 
   return (
-    <div className="card-wrapper">
+    <div className="bg-charcoal rounded-xl flex flex-col box-border py-5 px-4 md:py-6 md:px-5 m-4 md:m-6 w-[256px] md:w-[200px]">
       <img
         src={
           albumCoverUrl === ""
             ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRf0hb13fLusfo_P50OtW_fQX8pkSsMwOt9GWvzhTDVw&s"
             : albumCoverUrl
         }
+        className="w-full rounded-xl shadow-cover mb-1"
       />
 
-      <div className="album-info-wrap">
-        <div className="date poppins-regular">{`${month} ${date}, ${year}`}</div>
-        <div className="title poppins-medium">{albumTitle}</div>
-        <div className="artist poppins-light">{formattedArtistName}</div>
+      <div className="mt-5 md:mt-3 mb-2">
+        <div className="text-md md:text-xs text-beige font-sans font-medium">{`${month} ${date}, ${year}`}</div>
+        <div className="text-lg text-white mt-4 mb-1 font-sans font-medium">{albumTitle}</div>
+        <div className="text-base text-beige-light font-light">{formattedArtistName}</div>
       </div>
 
-      <div className="genre-list">
+      <div className="flex flex-wrap">
         {genre &&
           genre.map((item, key) => {
             return <GenreItem genre={item} key={key} />;
           })}
       </div>
 
-      <div className="links">
+      <div>
         {links.length > 0 &&
           links.map((link, key) => {
             if (link.url !== "") {
               return (
-                <a href={link.url} className="link" target="_blank" key={key}>
-                  <FontAwesomeIcon icon={faSpotify} size="xl" />
+                <a href={link.url} className="text-spotify-green text-xl md:text-base" target="_blank" key={key}>
+                  <FontAwesomeIcon icon={faSpotify} size="xl" className="mt-6" />
                 </a>
               );
             }

@@ -86,8 +86,7 @@ export const AuthContextProvider = ({ children }) => {
             dispatch({ type: actions.LOGOUT });
             if (
               location.pathname !== "/login" &&
-              location.pathname !== "/signup" &&
-              location.pathname !== "/"
+              location.pathname !== "/signup"
             ) {
               navigate("/login"); // Navigate to login only if not already there
             }

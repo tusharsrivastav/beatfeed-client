@@ -19,7 +19,7 @@ function Home() {
   
 
   return (
-    <>
+    <div className="flex flex-col h-full">
       <FilterList
         filter={filter}
         sendFilterToParent={handleFilterChange}
@@ -30,7 +30,7 @@ function Home() {
         filter={filter}
         showWithCover={showWithCover}
       />
-    </>
+    </div>
   );
 }
 

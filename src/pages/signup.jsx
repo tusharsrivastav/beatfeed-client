@@ -117,92 +117,99 @@ const Signup = () => {
 
   return (
     <>
-      <h2 className="poppins-semibold">Sign Up</h2>
-      <form id="form-container">
-        <div className="input-avatar-container">
-          <img src={previewImage} alt="avatar" className="avatar-preview" />
-          <label htmlFor="avatar" className="avatar-label">
-            Upload Avatar
-          </label>
+      <p className="font-sans font-regular text-2xl text-white m-3">Sign Up</p>
+      <form className="text-beige-light md:border md:border-charcoal md:rounded-xl flex flex-col w-4/5 md:w-[600px] box-border items-center px-0 py-3 md:px-20 md:py-7 md:mb-32">
+        <div className="flex w-full my-6 items-center">
+          <img
+            src={previewImage}
+            alt="avatar"
+            className="size-24 rounded-full mr-6"
+          />
           <input
             type="file"
-            className="avatar-input"
+            className="opacity-0 absolute w-[0.1px] h-[0.1px]"
             name="avatar"
             id="avatar"
             onChange={handleAvatarChange}
           />
-          {previewImage && previewImage !== dummyAvatar && (
-            <button className="remove-avatar-btn" onClick={handleRemoveAvatar}>
-              Remove Avatar
-            </button>
-          )}
+          <div className="flex flex-col lg:flex-row">
+            <label htmlFor="avatar" className="bg-charcoal rounded px-3 py-2 m-0 my-2 lg:my-0 lg:mx-4 cursor-pointer text-[0.8rem] text-white text-center w-32 lg:w-auto hover:opacity-85">
+              Upload Avatar
+            </label>
+            {previewImage && previewImage !== dummyAvatar && (
+              <button
+                className="bg-charcoal rounded px-3 py-2 m-0 cursor-pointer text-[0.8rem] text-white justify-center w-32 lg:w-auto hover:opacity-85"
+                onClick={handleRemoveAvatar}>
+                Remove Avatar
+              </button>
+            )}
+          </div>
         </div>
         {validationErrors.avatar && (
-          <p className="validation-error">{validationErrors.avatar}</p>
+          <p className="w-full font-sans text-red my-2 mb-4 leading-5">{validationErrors.avatar}</p>
         )}
 
-        <div className="input-field-container">
-          <label htmlFor="username">Username</label>
+        <div className="w-full mb-2 mt-5 lg:my-5">
+          <label htmlFor="username" className="text-md lg:text-base">Username</label>
           <input
             type="text"
-            className="input-field"
+            className="border border-charcoal rounded-md w-full bg-black h-12 p-3 box-border focus:outline-none"
             name="username"
             onChange={(e) => setUsername(e.target.value)}
           />
           {validationErrors.username && (
-            <p className="validation-error">{validationErrors.username}</p>
+            <p className="text-md text-red my-2 mb-1 leading-5">{validationErrors.username}</p>
           )}
         </div>
 
-        <div className="input-field-container">
-          <label htmlFor="email">Email:</label>
+        <div className="w-full mb-2 mt-5 lg:my-5">
+          <label htmlFor="email" className="text-md lg:text-base">Email</label>
           <input
             type="text"
-            className="input-field"
+            className="border border-charcoal rounded-md w-full bg-black h-12 p-3 box-border focus:outline-none"
             name="email"
             onChange={(e) => setEmail(e.target.value)}
           />
           {validationErrors.email && (
-            <p className="validation-error">{validationErrors.email}</p>
+            <p className="text-md text-red my-2 mb-1 leading-5">{validationErrors.email}</p>
           )}
         </div>
 
-        <div className="input-field-container">
-          <label htmlFor="fullname">Fullname</label>
+        <div className="w-full mb-2 mt-5 lg:my-5">
+          <label htmlFor="fullname" className="text-md lg:text-base">Fullname</label>
           <input
             type="text"
-            className="input-field"
+            className="border border-charcoal rounded-md w-full bg-black h-12 p-3 box-border focus:outline-none"
             name="fullname"
             onChange={(e) => setFullname(e.target.value)}
           />
           {validationErrors.fullname && (
-            <p className="validation-error">{validationErrors.fullname}</p>
+            <p className="text-md text-red my-2 mb-1 leading-5">{validationErrors.fullname}</p>
           )}
         </div>
 
-        <div className="input-field-container">
-          <label htmlFor="password">Password</label>
+        <div className="w-full my-5 lg:my-5">
+          <label htmlFor="password" className="text-md lg:text-base">Password</label>
           <input
             type="password"
-            className="input-field"
+            className="border border-charcoal rounded-md w-full bg-black h-12 p-3 box-border focus:outline-none"
             name="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <span className="fa-solid fa-eye" id="togglePassword"></span>
           {validationErrors.password && (
-            <p className="validation-error">{validationErrors.password}</p>
+            <p className="text-md text-red my-2 mb-4 leading-5">{validationErrors.password}</p>
           )}
         </div>
 
         <button
           type="submit"
-          id="submit-btn"
+          className="w-[120px] box-border bg-transparent border border-blue rounded-md text-blue px-5 py-3 text-base cursor-pointer my-12 lg:my-6 opacity-100 hover:opacity-80 disabled:border-charcoal disabled:text-charcoal disabled:hover:opacity-100"
           onClick={handleSignup}
           disabled={isLoading}>
           Signup
         </button>
 
-        {error && <div className="error poppins-regular">{error}</div>}
+        {error && <div className="font-sans w-full text-md font-light text-beige bg-red-light border border-red rounded-md my-4 mx-6 py-3 px-6 box-border">{error}</div>}
       </form>
     </>
   );
